@@ -28,7 +28,6 @@
       display: flex;
       flex-direction: column;
     }
-    /* Top Navigation Bar */
     header {
       background: #2b2623;
       color: #f5f0e6;
@@ -84,7 +83,6 @@
       border-color: #9ec47c;
     }
 
-    /* Main Slide Stage */
     main {
       flex: 1;
       max-width: 1440px;
@@ -161,13 +159,18 @@
       gap: 16px;
       align-items: stretch;
     }
+    .grid-compare-wide {
+      display: grid;
+      grid-template-columns: 2.5fr 5.2fr 4.3fr;
+      gap: 16px;
+      align-items: stretch;
+    }
     @media (max-width: 1024px) {
-      .grid-2col, .grid-overview, .grid-compare {
+      .grid-2col, .grid-overview, .grid-compare, .grid-compare-wide {
         grid-template-columns: 1fr;
       }
     }
 
-    /* Cards & Image Panels */
     .col-stack {
       display: flex;
       flex-direction: column;
@@ -279,7 +282,6 @@
       padding-top: 4px;
     }
 
-    /* Full Slide Image Mode */
     .full-img-stage {
       display: none;
       align-items: center;
@@ -293,7 +295,6 @@
       cursor: zoom-in;
     }
 
-    /* Lightbox Modal */
     #lightbox {
       display: none;
       position: fixed;
@@ -329,17 +330,14 @@
       <button id="b4" onclick="goSlide(4)">5. 主臥窗邊臥榻</button>
       <button id="b5" onclick="goSlide(5)">6. 臥室一</button>
       <button id="b6" onclick="goSlide(6)">7. 臥室二新舊對照</button>
-      <button id="b7" onclick="goSlide(7)">8. 臥室三</button>
+      <button id="b7" onclick="goSlide(7)">8. 臥室三兩案對照</button>
       <button id="b8" onclick="goSlide(8)">9. 客變2對照附錄</button>
       <button onclick="nextSlide()">▶</button>
     </div>
   </header>
 
   <main>
-    <!-- Mode 1: Lightweight Native HTML/CSS Layout -->
     <div id="native-stage" class="slide-box"></div>
-
-    <!-- Mode 2: 16:9 Rendered Slide Image Mode -->
     <div id="image-stage" class="full-img-stage">
       <img id="full-slide-img" src="" alt="Slide" onclick="openLightbox(this.src)" />
     </div>
@@ -384,11 +382,11 @@
             ]
           },
           {
-            title: "4. 臥室三 ＆ 客變 2 前期紀錄",
+            title: "4. 臥室三（兩案比較）＆ 客變 2 紀錄",
             badge: "Slide 8–9",
             style: "alert",
             items: [
-              ["討論與附錄", "臥室三檢視原圖床頭靠窗之調整可能（Slide 8）；前期客變 2 平面取捨與可延續之衣櫃內裝、桌下插座細節獨立於附錄（Slide 9）。"]
+              ["臥室三兩案", "避免床頭直接靠窗，目前比較兩案（尚未定案）：【A｜床頭矮書櫃】與【B 改｜架高床區與延伸衣櫃】（Slide 8）；客變 2 紀錄獨立於附錄（Slide 9）。"]
             ]
           }
         ],
@@ -646,45 +644,43 @@
           }
         ]
       },
-      // Slide 8
+      // Slide 8: Updated Bedroom 3 with Before vs Two Proposals (A & B改)
       {
-        tag: "臥室三｜空間討論",
-        title: "臥室三（次臥專頁）｜床頭靠窗風水疑慮與重新配置討論",
-        subtitle: "客變 1 原圖床頭直接靠東側外推窗；預售屋階段房內全空且無室內壓樑，請設計師評估改靠實牆方案",
-        layout: "2col",
-        leftPanel: {
-          title: "臥室三現況平面（國美瑞安-客變 1 原圖）",
-          badge: "待討論方案",
-          style: "alert",
-          img: "./slides_assets/b3_plan.jpg"
+        tag: "臥室三｜兩案比較",
+        title: "臥室三（次臥專頁）｜新舊格局對照（避免床頭靠窗之 A 案 vs B 改案比較）",
+        subtitle: "希望避免原圖床頭直接靠窗，目前比較「A｜床頭矮書櫃」與「B 改｜架高床區與延伸衣櫃」兩案（尚未定案）",
+        layout: "compare-wide",
+        beforePanel: {
+          title: "舊格局：客變 1 原圖",
+          badge: "Before",
+          style: "slate",
+          img: "./slides_assets/b3_before.jpg"
+        },
+        afterPanel: {
+          title: "新格局兩案比較：A 調整（床頭矮書櫃）vs B 改（架高床區與延伸衣櫃）",
+          badge: "兩案比較",
+          style: "olive",
+          img: "./slides_assets/b3_after_ab.jpg"
         },
         rightCards: [
           {
-            title: "1. 客變 1 原圖問題點：床頭靠窗",
-            badge: "風水與實用",
-            style: "alert",
-            items: [
-              ["床頭無實靠", "原圖將雙人床床頭直接貼在東側面向「屋頂平台」的外推窗前，風水上屬「床頭空虛無靠」。"],
-              ["居住舒適度", "窗邊易有溫差、微風與室外聲響干擾睡眠，且床頭緊貼窗戶會阻礙外推窗啟閉與窗簾盒安裝。"]
-            ]
-          },
-          {
-            title: "2. 空間現況條件釐清",
-            badge: "設計條件",
-            style: "teal",
-            items: [
-              ["無室內壓樑", "對照建商結構圖，靠窗的樑在室外（窗外），靠內的樑在走廊（房間外），房內無需考慮壓樑問題。"],
-              ["預售屋全空", "目前為預售屋客變階段，不用考慮任何固定家具（皆為空的，衣櫃、書桌、書櫃可重新配置）。"],
-              ["房門開向", "房門位於西側偏南，進門時往右（主臥隔間牆側）開啟。"]
-            ]
-          },
-          {
-            title: "3. 調整方向與請設計師協助評估",
-            badge: "待設計師提案",
+            title: "方案 A｜床頭矮書櫃（維持原配置・局部優化）",
+            badge: "提案 A",
             style: "olive",
             items: [
-              ["床頭靠實牆", "考慮將床頭改為背靠「客廳隔間牆」或「主臥隔間牆」，解決床頭靠窗問題。"],
-              ["整體重配置", "請設計師依臥室三完成面實際尺寸，協助提案床鋪、衣櫃與書桌之最佳配置與水電點位。"]
+              ["想法", "床維持南北向、靠東牆，床頭朝北，後方設矮書櫃，開口朝書桌區。書桌維持靠東牆，西側衣櫃向房門方向延長。"],
+              ["原因與取捨", "變動較少，可增加收納並分隔睡眠與讀書區；但床頭未直接靠實牆，書櫃也會占用活動空間。"],
+              ["待確認事項", "請設計師協助確認桌椅、取書及櫃門開啟空間。"]
+            ]
+          },
+          {
+            title: "方案 B 改｜架高床區與延伸衣櫃（重整機能）",
+            badge: "提案 B 改",
+            style: "teal",
+            items: [
+              ["想法", "床轉為東西向，床頭靠東側客廳實牆；書桌移至北牆，淺書架設於東牆。床區做收納平台，西側衣櫃由落地區延伸至平台上方（平台櫃門自平台面起，下層另設取物口）。"],
+              ["原因與取捨", "床頭可靠實牆，並增加床下與衣櫃收納；但需上下平台，床尾空間仍受限制。"],
+              ["待確認事項", "請協助確認櫃門與床墊間距、取衣與床下取物空間（及平台高度與窗戶開啟）。"]
             ]
           }
         ]
@@ -791,6 +787,14 @@
       } else if (s.layout === 'compare') {
         bodyHtml = `
           <div class="grid-compare">
+            <div>${renderImgPanel(s.beforePanel)}</div>
+            <div>${renderImgPanel(s.afterPanel)}</div>
+            <div class="col-stack">${s.rightCards.map(renderCard).join('')}</div>
+          </div>
+        `;
+      } else if (s.layout === 'compare-wide') {
+        bodyHtml = `
+          <div class="grid-compare-wide">
             <div>${renderImgPanel(s.beforePanel)}</div>
             <div>${renderImgPanel(s.afterPanel)}</div>
             <div class="col-stack">${s.rightCards.map(renderCard).join('')}</div>
