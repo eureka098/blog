@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國美瑞安｜格局調整討論簡報（2026-11-16）</title>
+  <style>
+    :root {
+      --bg-page: #f4efe6;
+      --bg-slide: #faf5ee;
+      --card-bg: #fffdf9;
+      --card-border: #ded2c1;
+      --olive: #5c6e44;
+      --teal: #486c76;
+      --slate: #787068;
+      --alert-bg: #fceee4;
+      --alert-txt: #9e442a;
+      --gold-pill: #f5ecd4;
+      --txt-dark: #2b2623;
+      --txt-muted: #696058;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+      background: var(--bg-page);
+      color: var(--txt-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Top Navigation Bar */
+    header {
+      background: #2b2623;
+      color: #f5f0e6;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 15px;
+      color: #e8dcc8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mode-switch {
+      background: #3d3530;
+      border: 1px solid #6b5e54;
+      color: #f5ecd4;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .mode-switch:hover { background: var(--olive); color: #fff; }
+    .nav-btns {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .nav-btns button {
+      background: #3d3530;
+      color: #f5f0e6;
+      border: 1px solid #574c44;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12.5px;
+      transition: all 0.15s;
+    }
+    .nav-btns button:hover { background: var(--olive); border-color: #8ab068; }
+    .nav-btns button.active {
+      background: var(--olive);
+      color: #fff;
+      font-weight: 700;
+      border-color: #9ec47c;
+    }
+
+    /* Main Slide Stage */
+    main {
+      flex: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .slide-box {
+      background: var(--bg-slide);
+      border: 1px solid var(--card-border);
+      border-top: 6px solid var(--olive);
+      border-radius: 14px;
+      padding: 22px 26px;
+      box-shadow: 0 10px 30px rgba(43,38,35,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .slide-top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag-pill {
+      background: var(--olive);
+      color: #fff;
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 4px 14px;
+      border-radius: 999px;
+    }
+    .page-meta {
+      font-size: 13px;
+      color: var(--txt-muted);
+    }
+    .slide-header h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--txt-dark);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .slide-header p {
+      font-size: 14.5px;
+      color: var(--txt-muted);
+      line-height: 1.45;
+    }
+    .divider {
+      height: 2px;
+      background: var(--card-border);
+      border: none;
+    }
+
+    /* Grid Layouts */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .grid-overview {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .grid-compare {
+      display: grid;
+      grid-template-columns: 3.6fr 3.6fr 4.8fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 1024px) {
+      .grid-2col, .grid-overview, .grid-compare {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards & Image Panels */
+    .col-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card.alert {
+      background: var(--alert-bg);
+    }
+    .card-header {
+      background: var(--olive);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15.5px;
+    }
+    .card-header.teal { background: var(--teal); }
+    .card-header.slate { background: var(--slate); }
+    .card-header.alert { background: var(--alert-txt); }
+    .badge {
+      background: #fff;
+      color: var(--olive);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .card-header.teal .badge { color: var(--teal); }
+    .card-header.slate .badge { color: var(--slate); }
+    .card-header.alert .badge { color: var(--alert-txt); }
+
+    .bullet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .bullet-label {
+      background: var(--gold-pill);
+      border: 1px solid var(--card-border);
+      color: var(--txt-dark);
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .img-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 6px;
+    }
+    .img-wrap img {
+      max-width: 100%;
+      max-height: 620px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      cursor: zoom-in;
+      border-radius: 6px;
+      transition: transform 0.15s;
+    }
+    .img-wrap img:hover {
+      transform: scale(1.01);
+    }
+    .zoom-hint {
+      font-size: 12px;
+      color: var(--txt-muted);
+      margin-top: 4px;
+    }
+
+    .slide-footer {
+      font-size: 12.5px;
+      color: var(--txt-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 4px;
+    }
+
+    /* Full Slide Image Mode */
+    .full-img-stage {
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .full-img-stage img {
+      width: 100%;
+      max-width: 1360px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      cursor: zoom-in;
+    }
+
+    /* Lightbox Modal */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 12, 10, 0.88);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    #lightbox img {
+      max-width: 96vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span>國美瑞安｜格局調整討論簡報</span>
+      <button class="mode-switch" id="mode-btn" onclick="toggleMode()">切換為：16:9 簡報圖模式</button>
+    </div>
+    <div class="nav-btns">
+      <button onclick="prevSlide()">◀</button>
+      <button id="b0" class="active" onclick="goSlide(0)">1. 客變1總覽</button>
+      <button id="b1" onclick="goSlide(1)">2. 主臥新舊對照</button>
+      <button id="b2" onclick="goSlide(2)">3. 主臥檯面與矮櫃</button>
+      <button id="b3" onclick="goSlide(3)">4. 主臥床頭立面水電</button>
+      <button id="b4" onclick="goSlide(4)">5. 主臥窗邊臥榻</button>
+      <button id="b5" onclick="goSlide(5)">6. 臥室一</button>
+      <button id="b6" onclick="goSlide(6)">7. 臥室二新舊對照</button>
+      <button id="b7" onclick="goSlide(7)">8. 臥室三</button>
+      <button id="b8" onclick="goSlide(8)">9. 客變2對照附錄</button>
+      <button onclick="nextSlide()">▶</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Mode 1: Lightweight Native HTML/CSS Layout -->
+    <div id="native-stage" class="slide-box"></div>
+
+    <!-- Mode 2: 16:9 Rendered Slide Image Mode -->
+    <div id="image-stage" class="full-img-stage">
+      <img id="full-slide-img" src="" alt="Slide" onclick="openLightbox(this.src)" />
+    </div>
+  </main>
+
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Zoomed" />
+  </div>
+
+  <script>
+    const slideData = [
+      // Slide 1
+      {
+        tag: "國美瑞安｜客變討論",
+        title: "國美瑞安｜預售屋格局調整與客變討論總覽",
+        subtitle: "基底圖面：國美瑞安-客變1.pdf｜整理目前各房想法與取捨，請設計師協助評估尺寸、方位與可行性",
+        layout: "overview",
+        leftCards: [
+          {
+            title: "1. 主臥室：以「主臥 1 版（床頭朝北）」為基礎",
+            badge: "Slide 2–5",
+            style: "olive",
+            items: [
+              ["床位與浴門", "在「客變2 浴室門對床」與「客變1 房門對床」間取捨後，偏向浴室門不正對床的客變 1，並在床頭西側新增三抽矮櫃遮擋房門視線。"],
+              ["重點調整", "北牆設固定淺檯面＋獨立投影機層板、東側保留輕盈收納臥榻（保留採光與窗邊漏水檢閱）、取消浴室前全高櫃、南側衣櫃局部改 30cm 淺書櫃。"]
+            ]
+          },
+          {
+            title: "2. 臥室一（次臥）：保留原版南側樑下書桌",
+            badge: "Slide 6",
+            style: "teal",
+            items: [
+              ["配置傾向", "曾比較轉向與移桌方案，受窗、櫃與椅子空間限制，傾向保留客變 1 原版「書桌在南側、樑下」配置，整體動線較順。"]
+            ]
+          },
+          {
+            title: "3. 臥室二（次臥）：床頭微移＋書桌書櫃互換",
+            badge: "Slide 7",
+            style: "teal",
+            items: [
+              ["配置方向", "取消厚床頭櫃貼向共用牆（增加床尾與全室空間感、減少床頭暴露窗邊）；書桌移東側（面東易察覺房門動靜）、書櫃移北側並保留廚房交界。"]
+            ]
+          },
+          {
+            title: "4. 臥室三 ＆ 客變 2 前期紀錄",
+            badge: "Slide 8–9",
+            style: "alert",
+            items: [
+              ["討論與附錄", "臥室三檢視原圖床頭靠窗之調整可能（Slide 8）；前期客變 2 平面取捨與可延續之衣櫃內裝、桌下插座細節獨立於附錄（Slide 9）。"]
+            ]
+          }
+        ],
+        rightPanel: {
+          title: "全室基準底圖：國美瑞安-客變 1（原始設計平面圖）",
+          badge: "客變 1 基底",
+          style: "olive",
+          img: "./slides_assets/overview_kebian1.jpg"
+        }
+      },
+      // Slide 2
+      {
+        tag: "國美瑞安｜客變討論",
+        title: "主臥（一）｜新舊格局左右對照（客變 1 原圖 vs 主臥 1 版調整）",
+        subtitle: "床頭維持朝北、浴室門原位；新增北牆淺檯面、東側窗邊臥榻、西側三抽矮櫃遮房門，並將南側衣櫃局部改淺書櫃",
+        layout: "compare",
+        beforePanel: {
+          title: "舊格局：客變 1 原圖（主臥）",
+          badge: "Before",
+          style: "slate",
+          img: "./slides_assets/mb_before.jpg"
+        },
+        afterPanel: {
+          title: "新格局：主臥 1 版調整後平面",
+          badge: "After",
+          style: "olive",
+          img: "./slides_assets/mb_after_plan.jpg"
+        },
+        rightCards: [
+          {
+            title: "主臥新舊格局 5 大調整重點",
+            badge: "主臥 1 版",
+            style: "olive",
+            items: [
+              ["1. 床頭檯面", "新增沿北牆固定淺檯面（一路延伸至東側窗邊放書與小物），上方中央另設獨立壁掛層板放投影機。"],
+              ["2. 西側矮櫃", "原遮擋短牆改為「三抽屜收納櫃（沿床長60×東西寬45×高110cm）」，櫃背靠北牆、抽屜朝南拉出，兼顧隱私與收納。"],
+              ["3. 東側臥榻", "保留東側工作桌，並新增深 40cm 輕盈木作窗邊臥榻（北端略縮短讓淺檯面延伸至窗邊）。"],
+              ["4. 南側書櫃", "南側衣櫃靠工作桌的一段改為深約 30cm 淺書櫃，便於拿書且坐在桌前右手側較寬鬆。"],
+              ["5. 入口開放", "浴室前原規劃的單面全高櫃傾向取消，讓入口與浴室動線開放。"]
+            ]
+          },
+          {
+            title: "東西向 471 cm 試排與待核對事項",
+            badge: "尺寸核對",
+            style: "alert",
+            cardAlert: true,
+            items: [
+              ["全寬 471cm", "由東側窗邊往西側入口試排：臥榻深 40＋窗側通道 75＋床架外寬 203＋床與矮櫃間隙 15＋矮櫃寬 45＋入口餘寬 93 ＝ 471 cm。"],
+              ["橫向與遮蔽", "請協助確認東西向完成面淨寬、入口 93cm 房門迴轉、抽屜全拉出站位與門口視線遮蔽效果。"],
+              ["南北向床尾", "床尾淨距請依南北向淨深、床架外長及北牆淺檯面深度另行核對。"]
+            ]
+          }
+        ]
+      },
+      // Slide 3
+      {
+        tag: "國美瑞安｜客變討論",
+        title: "主臥（二）｜北側床頭淺檯面、投影層板、三抽矮櫃與衣櫃細節",
+        subtitle: "對應 [主臥1版] 室內平面圖尺寸標註更新.png 之正立面、側剖圖與各區收納取捨",
+        layout: "2col",
+        leftPanel: {
+          title: "主臥｜淺床頭檯面與投影機層板（平面＋正立面＋側剖圖）",
+          badge: "主臥 1 版",
+          style: "olive",
+          img: "./slides_assets/mb_after_full.jpg"
+        },
+        rightCards: [
+          {
+            title: "各區設計想法、原因與取捨",
+            badge: "主臥細節",
+            style: "olive",
+            items: [
+              ["床頭淺檯面", "沿北牆做固定淺檯面延伸至東側窗邊，方便隨手放書與小物；上方設獨立壁掛層板放投影機。"],
+              ["西側三抽櫃", "床西側設三抽屜櫃（櫃背靠北牆、抽屜朝南側床尾拉出，暫擬 60×45×高110cm，與床試留 15cm）；由短牆改收納櫃兼顧隱私，但五金會減少可用容量。"],
+              ["南側淺書櫃", "南側衣櫃靠書桌段改深約 30cm 淺書櫃，便於拿書且坐桌前右手側較寬鬆（相對減少掛衣空間）。"],
+              ["身高 163cm 衣櫃", "衣櫃內希望有下方抽屜、上方掛衣及開門感應燈；常用掛桿依身高 163cm 試排，暫參考離地 150–155cm。"]
+            ]
+          },
+          {
+            title: "請設計師協助核對事項",
+            badge: "待確認",
+            style: "alert",
+            cardAlert: true,
+            items: [
+              ["檯面與投影機", "淺檯面深度請兼顧床尾通道；投影機層板高度、深度及投射位置請依機型核對。"],
+              ["矮櫃與防傾倒", "請協助確認門口視線遮蔽範圍、抽屜拉出及站立空間，以及櫃體固定與防傾倒。"],
+              ["書櫃與衣櫃檢修", "請協助確認 30cm 淺書櫃長度、桌椅與手部活動空間，並留意衣櫃長衣區及感應燈驅動器檢修。"]
+            ]
+          }
+        ]
+      },
+      // Slide 4
+      {
+        tag: "國美瑞安｜客變討論",
+        title: "主臥（三）｜北側床頭立面插座開關、照明與網路電源配置",
+        subtitle: "柔和易清潔防眩照明（無開放式積塵燈槽）；依新配置重新定位床側開關插座、書桌電源與有線網路孔",
+        layout: "2col",
+        leftPanel: {
+          title: "主臥｜北側床頭立面插座與開關試排",
+          badge: "床頭立面",
+          style: "olive",
+          img: "./slides_assets/mb_elevation.jpg"
+        },
+        rightCards: [
+          {
+            title: "北側床頭立面點位與照明原則",
+            badge: "水電與照明",
+            style: "olive",
+            items: [
+              ["柔和防眩照明", "希望以易清潔、無開放式積塵燈槽的柔和照明為主，搭配防眩燈具與分區控制。"],
+              ["檯面上雙插座", "淺檯面（暫深 15 cm）上方於西側、東側各設雙插座，檯上插座中心暫抓高於檯面 10–15 cm（試排）。"],
+              ["雙側床側開關", "床頭東西兩側各設床側開關；東側窗邊另設低位雙插孔（離地約 30 cm）。"],
+              ["投影機管線", "中央投影機層板旁預留高位 2 插孔＋訊號管。"]
+            ]
+          },
+          {
+            title: "全室機電重定位與待確認事項",
+            badge: "待確認",
+            style: "alert",
+            cardAlert: true,
+            items: [
+              ["插座網路重定位", "床側開關與插座、書桌上下電源、有線網路孔及衣櫃內插座，希望依主臥 1 版新配置重新定位。"],
+              ["留意抽屜車行程", "配置插座時，請留意抽屜車、插頭與線材的空間，避免碰撞或卡住。"],
+              ["投影機待定", "投影機及層板確切位置待機型確認後進一步討論。"]
+            ]
+          }
+        ]
+      },
+      // Slide 5
+      {
+        tag: "國美瑞安｜客變討論",
+        title: "主臥（四）｜東側輕盈木作窗邊臥榻（保留採光與窗邊漏水檢閱）",
+        subtitle: "靠北側床頭一端略縮短讓淺檯面延伸至窗邊；搭配活動抽屜車收納以保留採光及方便檢閱窗邊漏水",
+        layout: "2col",
+        leftPanel: {
+          title: "東側窗邊臥榻｜輕盈木作與活動抽屜車示意",
+          badge: "輕盈臥榻",
+          style: "olive",
+          img: "./slides_assets/mb_daybed.jpg"
+        },
+        rightCards: [
+          {
+            title: "東側窗邊臥榻想法、原因與取捨",
+            badge: "輕盈臥榻",
+            style: "olive",
+            items: [
+              ["設計想法", "保留輕盈木作收納臥榻，靠北側床頭的一端略縮短，讓北牆淺檯面延伸至窗邊；同時保留採光以及方便檢閱窗邊漏水。"],
+              ["功能與優勢", "可坐臥、搭配活動抽屜車收納以保留採光及窗邊漏水檢閱，也方便整理床鋪。"],
+              ["輕盈外觀", "木質側板退縮減少厚重感、抽屜面內縮形成陰影、端部少量留空。"],
+              ["空間取捨", "需要占用部分東側床側空間；目前暫以「臥榻深 40 cm、窗側通道 75 cm」試排。"]
+            ]
+          },
+          {
+            title: "請設計師協助核對事項",
+            badge: "待確認",
+            style: "alert",
+            cardAlert: true,
+            items: [
+              ["窗底檢修與漏水", "請確認活動抽屜車移出後之窗底檢修空間，是否方便日常檢閱窗邊漏水狀況。"],
+              ["窗扇與收納開啟", "請確認臥榻深 40 cm、通道 75 cm 下之窗扇開啟、窗簾配置與抽屜車拉出順暢度。"],
+              ["結構補強", "請確認輕盈木作坐面跨距補強與支撐間距。"]
+            ]
+          }
+        ]
+      },
+      // Slide 6
+      {
+        tag: "臥室一｜空間討論",
+        title: "臥室一（次臥專頁）｜保留原版南側樑下書桌配置",
+        subtitle: "比較轉向及移桌方案後，傾向保留客變 1 原版「書桌在南側、樑下」配置，整體動線較順",
+        layout: "2col",
+        leftPanel: {
+          title: "臥室一平面配置（保留客變 1 原版）",
+          badge: "維持原版",
+          style: "teal",
+          img: "./slides_assets/b1_plan.jpg"
+        },
+        rightCards: [
+          {
+            title: "1. 配置傾向：保留原版南側樑下書桌",
+            badge: "動線優先",
+            style: "olive",
+            items: [
+              ["配置傾向", "傾向保留「客變 1 原版」書桌在南側、樑下的配置，因為整體進出與日常使用動線較順。"],
+              ["空間完整度", "維持原版床位與雙排衣櫃布局，房門進入後動線單純不曲折。"]
+            ]
+          },
+          {
+            title: "2. 原因與取捨",
+            badge: "方案比較",
+            style: "teal",
+            items: [
+              ["曾評估方案", "先前曾比較將床轉向及移動書桌的方案，但新方案可能受到窗戶位置、衣櫃開門與椅子後退空間限制。"],
+              ["座位方向取捨", "原版配置需接受「座位較背向房門」，但換取最順暢的整體動線。"]
+            ]
+          },
+          {
+            title: "3. 請設計師協助核對事項",
+            badge: "待確認",
+            style: "alert",
+            cardAlert: true,
+            items: [
+              ["樑與坐姿關係", "請協助確認南側結構樑與書桌坐姿的關係（是否造成壓迫感或需修飾）。"],
+              ["桌椅、櫃門與採光", "請一併確認書桌椅活動空間、衣櫃門片開啟距離以及靠窗採光是否舒適。"]
+            ]
+          }
+        ]
+      },
+      // Slide 7
+      {
+        tag: "臥室二｜新舊對照",
+        title: "臥室二（次臥專頁）｜新舊格局左右對照（床頭移向共用牆＋書桌書櫃互換）",
+        subtitle: "取消厚床頭櫃增加床尾與全室空間感、減少床頭暴露窗邊；書桌移東側（面東易察覺房門）、書櫃移北側",
+        layout: "compare",
+        beforePanel: {
+          title: "舊格局：客變 1 原圖（臥室二）",
+          badge: "Before",
+          style: "slate",
+          img: "./slides_assets/b2_before.jpg"
+        },
+        afterPanel: {
+          title: "新格局：床頭靠牆＋書桌書櫃互換",
+          badge: "After",
+          style: "olive",
+          img: "./slides_assets/b2_after.jpg"
+        },
+        rightCards: [
+          {
+            title: "1. 床頭調整：取消厚床頭櫃",
+            badge: "放大空間感",
+            style: "olive",
+            items: [
+              ["想法", "取消厚床頭櫃，床維持原方向，床頭移向與臥室一的共用牆。"],
+              ["原因與取捨", "希望增加床尾活動空間乃至整個房間的空間感；同時減少床頭暴露在窗邊的部分（相對減少床頭收納）。"]
+            ]
+          },
+          {
+            title: "2. 書桌、書櫃與廚房交界",
+            badge: "書桌互換",
+            style: "teal",
+            items: [
+              ["想法", "書桌移至東側，座位面向東；書櫃移至北側。保留原設計中提供廚房檯面的區域與特殊交界。"],
+              ["原因與取捨", "坐著更容易察覺房門動靜，且書櫃的深度較淺也讓北側交界看起來更平整。"]
+            ]
+          },
+          {
+            title: "3. 請設計師協助核對事項",
+            badge: "待確認",
+            style: "alert",
+            cardAlert: true,
+            items: [
+              ["床頭與隔音", "請一併協助確認床側插座、上方樑位與共用牆隔音。"],
+              ["桌櫃與門迴旋", "房內空間會受到廚房檯面影響，請協助確認桌深、椅子後退、書櫃使用及門片迴旋。"]
+            ]
+          }
+        ]
+      },
+      // Slide 8
+      {
+        tag: "臥室三｜空間討論",
+        title: "臥室三（次臥專頁）｜床頭靠窗風水疑慮與重新配置討論",
+        subtitle: "客變 1 原圖床頭直接靠東側外推窗；預售屋階段房內全空且無室內壓樑，請設計師評估改靠實牆方案",
+        layout: "2col",
+        leftPanel: {
+          title: "臥室三現況平面（國美瑞安-客變 1 原圖）",
+          badge: "待討論方案",
+          style: "alert",
+          img: "./slides_assets/b3_plan.jpg"
+        },
+        rightCards: [
+          {
+            title: "1. 客變 1 原圖問題點：床頭靠窗",
+            badge: "風水與實用",
+            style: "alert",
+            items: [
+              ["床頭無實靠", "原圖將雙人床床頭直接貼在東側面向「屋頂平台」的外推窗前，風水上屬「床頭空虛無靠」。"],
+              ["居住舒適度", "窗邊易有溫差、微風與室外聲響干擾睡眠，且床頭緊貼窗戶會阻礙外推窗啟閉與窗簾盒安裝。"]
+            ]
+          },
+          {
+            title: "2. 空間現況條件釐清",
+            badge: "設計條件",
+            style: "teal",
+            items: [
+              ["無室內壓樑", "對照建商結構圖，靠窗的樑在室外（窗外），靠內的樑在走廊（房間外），房內無需考慮壓樑問題。"],
+              ["預售屋全空", "目前為預售屋客變階段，不用考慮任何固定家具（皆為空的，衣櫃、書桌、書櫃可重新配置）。"],
+              ["房門開向", "房門位於西側偏南，進門時往右（主臥隔間牆側）開啟。"]
+            ]
+          },
+          {
+            title: "3. 調整方向與請設計師協助評估",
+            badge: "待設計師提案",
+            style: "olive",
+            items: [
+              ["床頭靠實牆", "考慮將床頭改為背靠「客廳隔間牆」或「主臥隔間牆」，解決床頭靠窗問題。"],
+              ["整體重配置", "請設計師依臥室三完成面實際尺寸，協助提案床鋪、衣櫃與書桌之最佳配置與水電點位。"]
+            ]
+          }
+        ]
+      },
+      // Slide 9
+      {
+        tag: "客變 2｜獨立附錄",
+        title: "附錄｜主臥 2 版（客變 2）前期對照紀錄與可借鏡細節",
+        subtitle: "將客變 2 獨立整理：雖因「浴室門對床」不採用其平面，但衣櫃內裝與桌下插座細節可延續參考",
+        layout: "compare",
+        beforePanel: {
+          title: "客變 2 平面與北牆初稿",
+          badge: "客變 2 方案",
+          style: "teal",
+          img: "./slides_assets/kb2_plan.jpg",
+          img2: "./slides_assets/kb2_north.jpg"
+        },
+        afterPanel: {
+          title: "衣櫃內裝（身高163cm）與桌下插座避讓細節",
+          badge: "可借鏡細節",
+          style: "olive",
+          img: "./slides_assets/kb2_headboard.jpg"
+        },
+        rightCards: [
+          {
+            title: "1. 客變 2（主臥 2 版）取捨紀錄",
+            badge: "平面取捨",
+            style: "alert",
+            items: [
+              ["客變 2 嘗試", "先前曾嘗試客變 2（床頭朝南靠樑下低櫃、北牆作為床尾投影牆），整體效果不錯。"],
+              ["回歸客變 1", "但客變 2「浴室門對床」的問題較難解決；在「浴室門對床」與「房門對床」之間取捨後，最終偏向浴室門不正對床的客變 1（並以矮櫃遮擋房門視線）。"]
+            ]
+          },
+          {
+            title: "2. 客變 2 圖面中可延續參考之細節",
+            badge: "細節借鏡",
+            style: "olive",
+            items: [
+              ["衣櫃內裝試排", "「衣櫃內裝試排（使用者身高 163cm）」：下方抽屜區頂高約 55cm、上方常用掛桿離地約 150–155cm、上層放換季備品，可沿用至主臥 1 版。"],
+              ["桌下插座避讓", "工作桌「桌下電源避開抽屜車全行程與插頭線材空間」之配置概念，可沿用至主臥 1 版東側工作桌。"],
+              ["投影牆面概念", "「投影範圍中央不設面板、門邊與床頭雙切控制照明」之概念，可參考運用於主臥 1 版。"]
+            ]
+          }
+        ]
+      }
+    ];
+
+    let cur = 0;
+    let isImageMode = false;
+
+    function renderCard(c) {
+      const bullets = c.items.map(([lbl, txt]) => `
+        <li class="bullet-item">
+          <span class="bullet-label">${lbl}</span>
+          <span>${txt}</span>
+        </li>
+      `).join('');
+      return `
+        <div class="card ${c.cardAlert ? 'alert' : ''}">
+          <div class="card-header ${c.style}">
+            <span>${c.title}</span>
+            ${c.badge ? `<span class="badge">${c.badge}</span>` : ''}
+          </div>
+          <ul class="bullet-list">${bullets}</ul>
+        </div>
+      `;
+    }
+
+    function renderImgPanel(p) {
+      return `
+        <div class="card">
+          <div class="card-header ${p.style}">
+            <span>${p.title}</span>
+            ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+          </div>
+          <div class="img-wrap">
+            <img src="${p.img}" alt="${p.title}" onclick="openLightbox(this.src)" />
+            ${p.img2 ? `<img src="${p.img2}" alt="${p.title}" style="margin-top:10px;" onclick="openLightbox(this.src)" />` : ''}
+            <div class="zoom-hint">🔍 點擊圖片可放大檢視高解析細節</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSlide() {
+      const s = slideData[cur];
+      document.getElementById('full-slide-img').src = `./slides_assets/slide_${cur + 1}.jpg`;
+
+      let bodyHtml = '';
+      if (s.layout === 'overview') {
+        bodyHtml = `
+          <div class="grid-overview">
+            <div class="col-stack">${s.leftCards.map(renderCard).join('')}</div>
+            <div>${renderImgPanel(s.rightPanel)}</div>
+          </div>
+        `;
+      } else if (s.layout === '2col') {
+        bodyHtml = `
+          <div class="grid-2col">
+            <div>${renderImgPanel(s.leftPanel)}</div>
+            <div class="col-stack">${s.rightCards.map(renderCard).join('')}</div>
+          </div>
+        `;
+      } else if (s.layout === 'compare') {
+        bodyHtml = `
+          <div class="grid-compare">
+            <div>${renderImgPanel(s.beforePanel)}</div>
+            <div>${renderImgPanel(s.afterPanel)}</div>
+            <div class="col-stack">${s.rightCards.map(renderCard).join('')}</div>
+          </div>
+        `;
+      }
+
+      document.getElementById('native-stage').innerHTML = `
+        <div class="slide-top-meta">
+          <span class="tag-pill">${s.tag}</span>
+          <span class="page-meta">Slide ${cur + 1} / ${slideData.length} ｜ 更新日期：2026-11-16</span>
+        </div>
+        <div class="slide-header">
+          <h1>${s.title}</h1>
+          <p>${s.subtitle}</p>
+        </div>
+        <hr class="divider" />
+        ${bodyHtml}
+        <hr class="divider" />
+        <div class="slide-footer">
+          <span>與原始圖面對照時，再請設計師協助確認方位｜內容為討論方向，尺寸與點位尚待核實</span>
+          <span>支援鍵盤 ← → 切換頁面｜點擊任意圖片可全螢幕放大</span>
+        </div>
+      `;
+
+      for (let i = 0; i < slideData.length; i++) {
+        document.getElementById('b' + i).className = (i === cur) ? 'active' : '';
+      }
+    }
+
+    function goSlide(n) {
+      cur = (n + slideData.length) % slideData.length;
+      renderSlide();
+    }
+    function prevSlide() { goSlide(cur - 1); }
+    function nextSlide() { goSlide(cur + 1); }
+
+    function toggleMode() {
+      isImageMode = !isImageMode;
+      document.getElementById('native-stage').style.display = isImageMode ? 'none' : 'flex';
+      document.getElementById('image-stage').style.display = isImageMode ? 'flex' : 'none';
+      document.getElementById('mode-btn').textContent = isImageMode
+        ? '切換為：網頁互動排版模式'
+        : '切換為：16:9 簡報圖模式';
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    renderSlide();
+  </script>
+</body>
+</html>
